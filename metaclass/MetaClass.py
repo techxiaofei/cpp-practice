@@ -10,9 +10,10 @@ SaveObjMembers = {
 
 class MetaClass(type):
     _class_filter_list = ('__module__', '__doc__')
+    
     def __init__(cls, name, bases, dic):
         super().__init__(name, bases, dic)
-        print("MetaClass init")
+        print("MetaClass init",cls)
         funset = set()
         #处理函数
         for memClsName, memCls in SaveObjMembers.items():
