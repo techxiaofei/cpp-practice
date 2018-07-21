@@ -32,3 +32,5 @@
 *.app
 
 string/test
+
+metaclass/__pycache__/
