@@ -12,6 +12,9 @@ class Avatar(metaclass=MetaClass):
     
 
 if __name__ == "__main__":
+
+    print(hasattr(Avatar, "func1"))
+    print(hasattr(Avatar, "func2"))
     a = Avatar()
     a.func1()
     a.func2()
