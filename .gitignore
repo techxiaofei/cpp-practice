@@ -36,3 +36,7 @@ string/test
 metaclass/__pycache__/
 
 move/test
+
+\.vscode/
+
+callback/main
