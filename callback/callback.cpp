@@ -1,12 +1,12 @@
 #include <stdio.h>
 
-//typedef void(*p)(int a, int b);
+typedef void(*CB_FUNC)(int a, int b);
 
 void func(int a, int b){
     printf("callback func:%d+%d\n",a,b);
 }
 
-void c_callback(void (*callback)(int,int), int a, int b){
+void call_func(CB_FUNC callback, int a, int b){
     callback(a, b);
 }
 //以上是c语言回调示例
@@ -33,7 +33,7 @@ public:
 
 int main(){
     //c语言回调
-    c_callback(func, 3, 4);
+    call_func(func, 3, 4);
     //封装成c++的回调
     //Cpp cpp;
 
