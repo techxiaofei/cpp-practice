@@ -54,7 +54,8 @@ int main(){
     //cout << "split" << endl;
     //B&& a1 = fun(a0);
 
-    B a = func2();
+    B a;
+    a = func2();
 }
 
-//g++ -o test move.cpp --std=c++11
+//g++ -o test move.cpp --std=c++11 -fno-elide-constructors
