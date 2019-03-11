@@ -40,3 +40,7 @@ move/test
 \.vscode/
 
 callback/main
+
+memory_pool/test
+
+quicksort/test
