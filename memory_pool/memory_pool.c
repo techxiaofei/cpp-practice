@@ -25,8 +25,6 @@ MemoryPool* mem_pool_create(int size){
         for (int j = 0; j < mp->next->chunk_num; j++){
             Chunk* chunk_prev = mp->next->free_list;
             mp->next->free_list = (Chunk*)malloc(sizeof(Chunk));
-            mp->next->free_list->size = mp->next->chunk_size;
-            mp->next->free_list->ptr = (char*)malloc(mp->next->free_list->size);
             mp->next->free_list->next = chunk_prev;
         }
     }
@@ -35,7 +33,7 @@ MemoryPool* mem_pool_create(int size){
 }
 
 /*
-* fix，return chunk->ptr;
+* fix，return chunk->buffer;
 */
 void* mem_pool_alloc(MemoryPool* pool){
     Block *block = pool->next;
@@ -43,12 +41,15 @@ void* mem_pool_alloc(MemoryPool* pool){
     if (ret){
         block->free_list = block->free_list->next;
     }
-    return ret;
+    printf("mem_pool_alloc %p,%p\n",ret,ret->buf);
+    return (char*)ret+sizeof(struct Chunk*);
 }
 
 void mem_pool_free(MemoryPool* pool, void* memory){
     Chunk *old = pool->next->free_list;
-    pool->next->free_list = (Chunk*)memory;
+    Chunk* now = (Chunk*)(memory - sizeof(struct Chunk*));
+    printf("mem_pool_free %p\n",now);
+    pool->next->free_list = now;
     pool->next->free_list->next = old;
 }
 

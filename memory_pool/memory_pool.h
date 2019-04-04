@@ -6,10 +6,9 @@
 
 //最小的unit
 typedef struct _chunk{
-    char* ptr;
-    int size;
     //struct _chunk *prev;  //TODO
     struct _chunk *next;
+    char buf[POOL_CHUNK_SIZE];
 }Chunk;
 
 //一个block包括多个Chunk

@@ -6,8 +6,10 @@
 int main(){
     MemoryPool* pool = mem_pool_create(POOL_CHUNK_SIZE);
     char* buffer = mem_pool_alloc(pool);
+    printf("buffer %p\n",buffer);
     char* buffer2 = mem_pool_alloc(pool);
-    if (!buffer || !buffer){
+    printf("buffer2 %p\n",buffer2);
+    if (!buffer || !buffer2){
 
     }
 
@@ -19,6 +21,18 @@ int main(){
 
     mem_pool_free(pool, buffer);
     mem_pool_free(pool, buffer2);
+    //re test
+    char* buffer3 = mem_pool_alloc(pool);
+    printf("buffer3 %p\n",buffer3);
+    if (!buffer3){
+
+    }
+
+    strcpy(buffer3,"abcd\n");
+
+    printf("%s",buffer3);
+
+    mem_pool_free(pool, buffer3);
 
     return 0;
 }
