@@ -48,3 +48,5 @@ quicksort/test
 shared_ptr/test
 
 bigendian/test
+
+cfunc/test
