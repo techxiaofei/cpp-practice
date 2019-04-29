@@ -44,20 +44,30 @@ char* my_strcat(char* dest, const char* src){
     return strDest;
 }
 
+char* my_strncpy(char* dest, const char* src, int len){
+    if (src == NULL || dest == NULL) return NULL;
+    char* strDest = dest;
+    while(--len >= 0 && (*strDest++ = *src++));
+    *strDest = '\0';
+    return dest;
+}
+
 
 int main(){
-    const char *src = "test";
+    const char *src = "testtesttest";
     char dest1[16];
     char dest2[16];
     
-    strcpy(dest1, src);
-    strcat(dest1, src);
+    //strcpy(dest1, src);
+    //strcat(dest1, src);
     //memcpy(dest1, src, strlen(src)+1);
+    strncpy(dest1, src, 6);
     printf("dest1 is %s\n",dest1);
 
-    my_strcpy(dest2, src);
-    my_strcat(dest2, src);
+    //my_strcpy(dest2, src);
+    //my_strcat(dest2, src);
     //my_memcpy(dest2, src, strlen(src)+1);
+    my_strncpy(dest2, src, 6);
     printf("dest2 is %s\n",dest2);
 
     return 0;
