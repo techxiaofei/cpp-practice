@@ -12,6 +12,7 @@ void AOIGrid::Enter(uint64_t id, int gid){
     auto it = grids_.find(gid);
     if (it != grids_.end()){
         it->second.insert(id);
+        printf("Enter: gid:%d->entityid:%lu\n",gid, id);
     }
 }
 
@@ -25,6 +26,7 @@ void AOIGrid::Leave(uint64_t id, int gid){
     auto it = grids_.find(gid);
     if (it != grids_.end()){
         it->second.erase(id);
+        printf("Leave: gid:%d->entityid:%lu\n",gid, id);
     }
 }
 
@@ -207,7 +209,7 @@ void AOIGrid::leave_message(const Entity& entity, std::unordered_set<int> leave_
     }
 
     for (auto id : leave_entities){
-        printf("leave message->to entity:%llu, entityid=%llu,x=%d,y=%d\n",id,entity.id(),entity.x(), entity.y());
+        printf("leave message->to entity:%lu, entityid=%lu,x=%d,y=%d\n",id,entity.id(),entity.x(), entity.y());
     }
 }
 
@@ -218,7 +220,7 @@ void AOIGrid::enter_message(const Entity& entity, std::unordered_set<int> enter_
     }
 
     for (auto id : enter_entities){
-        printf("enter message->to entity:%llu, entityid=%llu,x=%d,y=%d\n",id,entity.id(),entity.x(), entity.y());
+        printf("enter message->to entity:%lu, entityid=%lu,x=%d,y=%d\n",id,entity.id(),entity.x(), entity.y());
     }
 }
 
@@ -229,7 +231,7 @@ void AOIGrid::move_message(const Entity& entity, std::unordered_set<int> move_gr
     }
 
     for (auto id : move_entities){
-        printf("move message->to entity:%llu, entityid=%llu,x=%d,y=%d\n",id,entity.id(),entity.x(), entity.y());
+        printf("move message->to entity:%lu, entityid=%lu,x=%d,y=%d\n",id,entity.id(),entity.x(), entity.y());
     }
 }
 

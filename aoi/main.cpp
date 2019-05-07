@@ -12,8 +12,8 @@ int main(){
 
     auto aoi = AOIGrid(width, height);
     int idx = 1;
-    for(int i = 0; i< width; i=i+2){
-        for(int j = 0; j< height; j=j+2){
+    for(int i = 0; i< width; i=i+8){
+        for(int j = 0; j< height; j=j+8){
             Entity* tmp = new Entity(idx, i, j);
             idx++;
             entities.push_back(tmp);
