@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -49,35 +50,50 @@ private:
     int length_;
     int* data_;
 };
-
+/**
+ * 移动语义提高程序性能示例1
+ */
 B func()
 {
     B t(2);
     return t;
 }
 /**
- * 展示右值引用优势的代码
+ * 移动语义提高程序性能示例2
  */
 template <typename T>
 void swap2(T& a, T& b){
-    /*
     T tmp(std::move(a));
     a=std::move(b);
     b=std::move(tmp);
-    */
+    
+   /*
    T tmp = a;
    a = b;
    b = tmp;
+   */
 }
 
 int main(){
-    //B a(2);
-    //a = func();
-
+    /*
+    B a(2);
+    a = func();
+    */
+    /*
     B a(4);
     B b(2);
     swap2(a,b);
     std::cout<< a.length() << b.length() << std::endl;
+    */
+    /**
+     * 移动语义提高程序性能示例3
+     */
+    std::vector<B> v;
+    std::cout<<"111"<<std::endl;
+    v.push_back(B(2));
+    std::cout<<"222"<<std::endl;
+    v.push_back(B(4));
+    std::cout<<"333"<<std::endl;
 }
 
 //g++ -o test move.cpp --std=c++11 -fno-elide-constructors
