@@ -5,57 +5,79 @@ using namespace std;
 class B
 {
 public:
-     B() :data(0)    //默认构造函数  
-    {
-        cout << "Default constructor is called." << endl;
+    explicit B(int length):length_(length),data_(new int[length]){ //带参数的构造函数  
+        cout << "Constructor is called." << length_ << endl;
     }
-    B(int i) :data(i) //带参数的构造函数  
-    {
-        cout << "Constructor is called." << data << endl;
+    B(const B &b):length_(b.length_),data_(new int[b.length_]){   // 复制构造函数
+        //copy data
+        cout << "Copy Constructor is called." << length_ << endl;
     }
-    B(const B &b)   // 复制（拷贝）构造函数  
-    {
-        data = b.data; 
-        cout << "Copy Constructor is called." << data << endl;
+    B& operator = (const B &b){ //赋值操作符
+        if (this != &b){
+            delete[] data_;
+            length_ = b.length_;
+            data_ = b.data_;
+        }
+        cout << "The operator \"= \" is called." << length_ << endl;
+        return *this;
     }
     B(B&& b)      // 移动构造函数，严格意义上移动构造函数的作用是，this去接管b的资源，同时b的资源被销毁
     {
-        this->data = b.data;
-        cout << "Move Constructor is called." <<data<< endl;
+        length_ = b.length_;
+        data_ = b.data_;
+        cout << "Move Constructor is called." <<length_<< endl;
     }
-    B& operator = (const B &b) //赋值运算符的重载  
-    {
-        this->data = b.data;
-        cout << "The operator \"= \" is called." << data << endl;
-        return *this;
+    B& operator = (B&& b){
+        if (this != &b){
+            delete[] data_;
+            length_ = b.length_;
+            data_ = b.data_;
+        }
+        cout << "Move operator is called." <<length_<< endl;
     }
     ~B() //析构函数  
     {
-        cout << "Destructor is called. " << data <<" "<<&data<< endl;
+        if (data_ != nullptr){
+            delete[] data_;
+        }
+        cout << "Destructor is called. " << length_ << endl;
     }
+
+    inline int length() const{return length_;}
+
 private:
-    int data;
+    int length_;
+    int* data_;
 };
 
-B fun(B c)
+B func()
 {
-    cout << "split2" << endl;
-    return c;
-}
-
-B func2()
-{
-    B t;
+    B t(2);
     return t;
+}
+/**
+ * 展示右值引用优势的代码
+ */
+template <typename T>
+void swap2(T& a, T& b){
+    /*
+    T tmp(std::move(a));
+    a=std::move(b);
+    b=std::move(tmp);
+    */
+   T tmp = a;
+   a = b;
+   b = tmp;
 }
 
 int main(){
-    //B a0(0);
-    //cout << "split" << endl;
-    //B&& a1 = fun(a0);
+    //B a(2);
+    //a = func();
 
-    B a;
-    a = func2();
+    B a(4);
+    B b(2);
+    swap2(a,b);
+    std::cout<< a.length() << b.length() << std::endl;
 }
 
 //g++ -o test move.cpp --std=c++11 -fno-elide-constructors
