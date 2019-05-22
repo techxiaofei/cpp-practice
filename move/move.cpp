@@ -1,3 +1,7 @@
+/*
+* 参考代码： https://docs.microsoft.com/zh-cn/cpp/cpp/move-constructors-and-move-assignment-operators-cpp?view=vs-2019
+*/
+
 #include <iostream>
 #include <vector>
 
