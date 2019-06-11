@@ -1,5 +1,5 @@
 def Singleton(cls):
-    """装饰器"""
+    """装饰器,依赖闭包，python3以前没有nonlocal，所以需要定义为可变对象，比如，_instance={}"""
     _instance = None
     def wrap(*args, **kwargs):
         nonlocal _instance
@@ -9,7 +9,7 @@ def Singleton(cls):
     return wrap
 
 class Singleton2():
-    """继承"""
+    """继承,依赖类变量_instance,"""
     def __new__(cls, *args, **kwargs):
         if not hasattr(cls, "_instance"):
             cls._instance = super().__new__(cls, *args, **kwargs)
