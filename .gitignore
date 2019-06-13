@@ -52,3 +52,5 @@ bigendian/test
 cfunc/test
 
 aoi/test
+
+heapsort/test
