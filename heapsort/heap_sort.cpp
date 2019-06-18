@@ -60,3 +60,5 @@ int main()
 	printf("\n");
 	return 0;
 }
+
+//g++ -o test heap_sort.cpp
